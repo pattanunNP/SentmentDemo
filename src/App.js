@@ -72,7 +72,7 @@ function App() {
     const fetchData = async () => {
       await axios
         .post(
-          "http://139.59.226.161/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
+          "/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
           input
         )
         .then(
