@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   CardFlex: {
-    width: "500px",
+    width: "300px",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
   },
   CardFlex2: {
     marginTop: "100px",
-    width: "500px",
+    width: "300px",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -72,9 +72,9 @@ function App() {
     const fetchData = async () => {
       await axios
         .post(
-          "/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
+          "http://139.59.226.161/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
           input
-        )
+       )
         .then(
           (response) => {
             setTimeout(() => {
