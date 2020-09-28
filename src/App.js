@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   CardFlex: {
-    width: "300px",
+    width: "auto",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
   },
   CardFlex2: {
     marginTop: "100px",
-    width: "300px",
+    width: "auto",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -99,7 +99,7 @@ function App() {
         <Typography>
           <h1 className={classes.title}>
             ระบบวิเคราะห์อารมณ์ของประโยค ด้วยเทคโนโลยีปัญญาประดิษฐ์ เวอร์ชั่น
-            1.0.2
+            1.0.0
           </h1>
         </Typography>
         <form onSubmit={predict}>
@@ -112,7 +112,7 @@ function App() {
                 className={classes.title}
                 style={{
                   borderRadius: "10px",
-                  width: "450px",
+                  width: "auto",
                   padding: "0.5rem",
                   fontSize: "18px",
                 }}
