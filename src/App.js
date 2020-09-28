@@ -118,7 +118,7 @@ function App() {
                 }}
                 aria-label="minimum height"
                 rowsMin={5}
-                colsMin={5}
+                colsMin={3}
                 value={input.sentence}
                 placeholder="ระบุข้อความ"
                 onChange={handleChange}
