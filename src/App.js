@@ -70,11 +70,19 @@ function App() {
     // console.log(input.sentence);
     setLoading(true);
     const fetchData = async () => {
-      await axios
-        .post(
-          "http://139.59.226.161/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
-          input
-       )
+      await axios("http://139.59.226.161/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",{
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': 'http://139.59.226.161',
+        'Content-Type': 'application/json',
+      },
+      data:{
+         sentence:input.sentence
+      },
+      withCredentials: true,
+      credentials: 'same-origin'
+       })
         .then(
           (response) => {
             setTimeout(() => {
