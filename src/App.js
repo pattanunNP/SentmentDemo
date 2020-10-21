@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   CardFlex: {
-    width: "500px",
+    width: "auto",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
   },
   CardFlex2: {
     marginTop: "100px",
-    width: "500px",
+    width: "auto",
     fontFamily: "Mitr",
     backgroundColor: "white",
     padding: "1.5rem",
@@ -79,6 +79,7 @@ function App() {
           "http://128.199.144.219/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
           input
         )
+
         .then(
           (response) => {
             setTimeout(() => {
@@ -147,13 +148,13 @@ function App() {
                 className={classes.title}
                 style={{
                   borderRadius: "10px",
-                  width: "450px",
+                  width: "auto",
                   padding: "0.5rem",
                   fontSize: "18px",
                 }}
                 aria-label="minimum height"
                 rowsMin={5}
-                colsMin={5}
+                colsMin={3}
                 value={input.sentence}
                 placeholder="ระบุข้อความ"
                 onChange={handleChange}
