@@ -22,6 +22,10 @@ const useStyles = makeStyles(() => ({
     fontFamily: "Mitr",
     flexGrow: 1,
   },
+  keywords: {
+    fontFamily: "Mitr",
+    flexGrow: 1,
+  },
   CardFlex: {
     width: "500px",
     fontFamily: "Mitr",
@@ -43,7 +47,7 @@ const useStyles = makeStyles(() => ({
     width: "450px",
     borderRadius: "20px",
     fontFamily: "Mitr",
-    backgroundImage: "linear-gradient(to top, #ff0844 0%, #ffb199 100%)",
+    backgroundImage: "linear-gradient(to top, #ff0844 0%, #ff3199 100%)",
   },
   buttonProgress: {
     color: "white",
@@ -72,7 +76,7 @@ function App() {
     const fetchData = async () => {
       await axios
         .post(
-          "http://139.59.226.161/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
+          "http://128.199.144.219/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
           input
         )
         .then(
@@ -91,20 +95,51 @@ function App() {
         );
     };
 
-    fetchData();
+    if (input.sentence.length > 0) {
+      fetchData();
+    }
+  }
+  function traslate(text) {
+    console.log(text);
+    if (text === "Positive") {
+      return "เชิงบวก";
+    } else if (text === "Negative") {
+      return "เชิงลบ";
+    } else if (text === "Question") {
+      return "คำถาม";
+    } else if (text === "Netural") {
+      return "ทั่วไป";
+    }
+  }
+  function get_image(text) {
+    console.log(text);
+    if (text === "Positive") {
+      return "https://www.flaticon.com/svg/static/icons/svg/2210/2210715.svg";
+    } else if (text === "Negative") {
+      return "https://www.flaticon.com/svg/static/icons/svg/2210/2210827.svg";
+    } else if (text === "Question") {
+      return "https://www.flaticon.com/svg/static/icons/svg/3649/3649795.svg";
+    } else if (text === "Netural") {
+      return "https://www.flaticon.com/svg/static/icons/svg/742/742774.svg";
+    }
   }
   return (
     <div className="App">
       <header className="App-header">
         <Typography>
           <h1 className={classes.title}>
-            ระบบวิเคราะห์อารมณ์ของประโยค ด้วยเทคโนโลยีปัญญาประดิษฐ์ เวอร์ชั่น
-            1.0.2
+            ระบบวิเคราะห์อารมณ์ของประโยค ด้วยเทคโนโลยีปัญญาประดิษฐ์
           </h1>
         </Typography>
+
         <form onSubmit={predict}>
           <Box position="flex" justifyContent="center">
             <Card className={classes.CardFlex}>
+              <img
+                width="50px"
+                src="https://www.flaticon.com/svg/static/icons/svg/1838/1838353.svg"
+                alt="predict"
+              />
               <Typography>
                 <h1 className={classes.title}>วิเคราะห์ประโยค</h1>
               </Typography>
@@ -124,11 +159,15 @@ function App() {
                 onChange={handleChange}
               />
               <Button className={classes.Predict} type="submit">
-                {loading && (
-                  <CircularProgress
-                    size={24}
-                    className={classes.buttonProgress}
-                  />
+                {input.sentence.length > 0 ? (
+                  loading && (
+                    <CircularProgress
+                      size={24}
+                      className={classes.buttonProgress}
+                    />
+                  )
+                ) : (
+                  <div></div>
                 )}
                 วิเคราะห์
               </Button>
@@ -138,19 +177,26 @@ function App() {
 
         <Box position="flex" justifyContent="center">
           <Collapse in={open}>
-            <Card className={classes.CardFlex2} style={{ overflowY: "scroll" }}>
+            <Card className={classes.CardFlex2} style={{ overflow: "scroll" }}>
+              <img
+                width="50px"
+                src={get_image(results.PredictedClass)}
+                alt="predict"
+              />
               <Typography>
                 <h1 className={classes.title}>ผลการวิเคราะห์ประโยค</h1>
               </Typography>
               <Typography
                 style={{
-                  backgroundColor: "#89beb3",
+                  backgroundImage:
+                    "radial-gradient( circle 862px at 6% 18%,  rgba(21,219,149,1) 9.4%, rgba(26,35,160,1) 83.6% )",
                   color: "white",
                   marginLeft: "10px",
+                  borderRadius: 20,
                 }}
               >
                 <h3 className={classes.title}>
-                  ประโยคนี้เป็น {results.sentiment}
+                  ประโยคนี้เป็น {traslate(results.PredictedClass)}
                 </h3>
               </Typography>
               <Typography>
@@ -162,61 +208,77 @@ function App() {
                 </h3>
               </Typography>
               <Typography>
-                <h3 className={classes.title}>Keywords:</h3>
+                <h3 className={classes.keyword}>Keywords:</h3>
               </Typography>
-              {typeof results.Keyword !== "undefined" ? (
-                results.Keyword.map((word) => (
-                  <Box position="flex" justifyContent="flex-start">
+              {typeof results.Keywords !== "undefined" ? (
+                <div>
+                  {results.Keywords.map((keyword, item) => (
                     <Chip
-                      label={word}
-                      style={{ backgroundColor: "#ff0844", color: "white" }}
+                      key={item}
+                      label={keyword}
+                      style={{
+                        backgroundImage:
+                          "radial-gradient( circle farthest-corner at 10% 20%,  rgba(102,116,236,1) 0%, rgba(50,231,219,1) 90% )",
+                        color: "white",
+                        marginLeft: "10px",
+                      }}
                     />
-                  </Box>
-                ))
+                  ))}
+                </div>
               ) : (
-                <Typography>
-                  <h3 className={classes.title}>ไม่พบ Keyword</h3>
-                </Typography>
+                <div></div>
               )}
 
-              {typeof results.ranking !== "undefined" ? (
+              {typeof results.RankingByCoefident !== "undefined" ? (
                 <div>
                   <Chip
                     label={
-                      "Positive " + results.ranking["Positive"].toFixed(2) + "%"
+                      "เชิงบวก " +
+                      results.RankingByCoefident["Positive"].toFixed(2) +
+                      "%"
                     }
                     style={{
-                      backgroundColor: "#89beb3",
+                      backgroundImage:
+                        "radial-gradient( circle 862px at 6% 18%,  rgba(21,219,149,1) 9.4%, rgba(26,35,160,1) 83.6% )",
                       color: "white",
                       marginLeft: "10px",
                     }}
                   />
                   <Chip
                     label={
-                      "Question " + results.ranking["Question"].toFixed(2) + "%"
+                      "คำถาม " +
+                      results.RankingByCoefident["Question"].toFixed(2) +
+                      "%"
                     }
                     style={{
-                      backgroundColor: "#51adcf",
+                      backgroundImage:
+                        "linear-gradient( 111.4deg,  rgba(122,192,233,1) 18.8%, rgba(4,161,255,1) 100.2% )",
                       color: "white",
                       marginLeft: "10px",
                     }}
                   />
                   <Chip
                     label={
-                      "Netural " + results.ranking["Netural"].toFixed(2) + "%"
+                      "ทั่วไป " +
+                      results.RankingByCoefident["Netural"].toFixed(2) +
+                      "%"
                     }
                     style={{
-                      backgroundColor: "#ffd571",
+                      backgroundImage:
+                        "linear-gradient( 109.6deg,  rgba(255,219,47,1) 11.2%, rgba(244,253,0,1) 100.2% )",
                       color: "black",
                       marginLeft: "10px",
                     }}
                   />
                   <Chip
                     label={
-                      "Negative " + results.ranking["Negative"].toFixed(2) + "%"
+                      "เชิงลบ " +
+                      results.RankingByCoefident["Negative"].toFixed(2) +
+                      "%"
                     }
                     style={{
-                      backgroundColor: "#ff0844",
+                      backgroundImage:
+                        "radial-gradient( circle 830px at 95.6% -5%,  rgba(244,89,128,1) 0%, rgba(223,23,55,1) 90% )",
                       color: "white",
                       marginLeft: "10px",
                     }}
@@ -224,10 +286,9 @@ function App() {
                 </div>
               ) : (
                 <Typography>
-                  <h3 className={classes.title}>ไม่พบ Keyword</h3>
+                  <h3 className={classes.title}>erorr</h3>
                 </Typography>
               )}
-
               <Button
                 style={{ marginTop: "20px" }}
                 className={classes.Predict}

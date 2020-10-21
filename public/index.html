@@ -2,16 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="icon"
+      href="https://www.flaticon.com/svg/static/icons/svg/1838/1838353.svg"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Thai Sentiment Analysis Demo" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="description" content="Thai Sentiment Analysis" />
+    <link
+      rel="apple-touch-icon"
+      href="https://www.flaticon.com/svg/static/icons/svg/1838/1838353.svg"
+    />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta property="og:url" content="https://lodashsentiment.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Thai Sentiment Analysis" />
+    <meta property="og:description" content="What's the emotion of sentence " />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1543858623-7bc945109f24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -24,23 +38,26 @@
     <style>
       ::-webkit-scrollbar {
         width: 10px;
+        border-radius: 50px;
       }
 
       /* Track */
       ::-webkit-scrollbar-track {
         background: #f1f1f1;
+        border-radius: 50px;
       }
 
       /* Handle */
       ::-webkit-scrollbar-thumb {
-        background: rgb(105, 102, 100);
+        background-image: linear-gradient(135deg, #52e5e7 10%, #130cb7 100%);
         height: 50px;
         border-radius: 50px;
       }
 
       /* Handle on hover */
       ::-webkit-scrollbar-thumb:hover {
-        background: rgb(255, 81, 4);
+        background-image: linear-gradient(135deg, #52e5e7 10%, #130cb7 100%);
+        border-radius: 50px;
       }
     </style>
     <title>Thai Sentiment Analysis</title>
