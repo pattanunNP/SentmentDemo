@@ -304,7 +304,6 @@ function App() {
           </Collapse>
           <Modal
             open={true}
-            onClose={() => setOpenErr(false)}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
