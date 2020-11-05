@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Modal from '@material-ui/core/Modal';
 import axios from "axios";
 import {
   makeStyles,
@@ -301,6 +302,26 @@ function App() {
               </Button>
             </Card>
           </Collapse>
+          <Modal
+            open={true}
+            onClose={() => setOpenErr(false)}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <Card
+              style={{
+                width: "420px",
+                marginLeft: "150px",
+                padding: "1rem",
+                borderRadius: "30px"
+              }}
+            >
+              <Typography>
+                <h1 style={{ color: "red" }}> Error 503 </h1>
+                <h2> Internal API Server Error</h2>
+              </Typography>
+            </Card>
+          </Modal>
         </Box>
       </header>
       <style>
