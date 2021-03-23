@@ -64,7 +64,7 @@ function App() {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [results, setResult] = React.useState("");
-  const [input, setInput] = React.useState({ sentence: "" });
+  const [input, setInput] = React.useState({ sentence: "",token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImxvZGFzaCIsInBhc3N3b3JkIjoibWFzdGVyX0Bzcmc4MzQifQ.7nDcspi9r4jFakqBgRXvOKvFRrCXiz1XQgcQsXNzEQI" });
 
   function handleChange(e) {
     setInput({ sentence: e.target.value });
@@ -77,8 +77,8 @@ function App() {
     const fetchData = async () => {
       await axios
         .post(
-          "http://128.199.144.219/api/sentiment/predict?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9kYXNoIiwicGFzcyI6Im1hc3Rlcl9Ac3JnODM0In0.JblcVJnoYP2lSvtuO7JsT5oElhK4nRt4OjCLW6voFTc",
-          input
+          "http://34.101.78.8/api/v1/sentiment_4/predict",
+        input
         )
 
         .then(
@@ -302,25 +302,6 @@ function App() {
               </Button>
             </Card>
           </Collapse>
-          <Modal
-            open={true}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
-            <Card
-              style={{
-                width: "420px",
-                marginLeft: "150px",
-                padding: "1rem",
-                borderRadius: "30px"
-              }}
-            >
-              <Typography>
-                <h1 style={{ color: "red" }}> Error 503 </h1>
-                <h2> Internal API Server Error</h2>
-              </Typography>
-            </Card>
-          </Modal>
         </Box>
       </header>
       <style>
