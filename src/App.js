@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Modal from '@material-ui/core/Modal';
 import axios from "axios";
 import {
   makeStyles,
